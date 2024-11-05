@@ -1,0 +1,12 @@
+server:
+  port: 8088
+  servlet:
+    context-path: /gestor
+spring:
+  servlet:
+  data:
+    mongodb:
+      uri: mongodb://localhost:27017/gestor-proyectos
+  jpa:
+    hibernate:
+      ddl-auto: update
