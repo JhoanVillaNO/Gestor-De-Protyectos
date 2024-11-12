@@ -4,6 +4,8 @@ import lombok.Data;
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
 
+import java.time.LocalDateTime;
+
 /**
  * @author Tgl. Jhoan Villa.
  * Email: jhoan.villa
@@ -17,4 +19,7 @@ public class Proyecto {
     private String nombre;
     private String userId;
     private String categoria;
+    private LocalDateTime fechaCreacion;
+    private LocalDateTime fechaModificacion;
+    private String estado;
 }

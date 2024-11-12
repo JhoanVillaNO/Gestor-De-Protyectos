@@ -1,8 +1,16 @@
 package co.edu.udea.gestor_de_proyectos.controller;
 
+import co.edu.udea.gestor_de_proyectos.model.dto.ActualizarUsuarioDTO;
+import co.edu.udea.gestor_de_proyectos.model.dto.CrearUsuarioDTO;
+import co.edu.udea.gestor_de_proyectos.model.usuario.UsuarioModel;
+import co.edu.udea.gestor_de_proyectos.service.UsuarioService;
 import lombok.RequiredArgsConstructor;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.data.domain.Page;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.*;
+
+import java.util.List;
 
 /**
  * @author Tgl. Jhoan Villa.
@@ -13,4 +21,31 @@ import org.springframework.web.bind.annotation.RestController;
 @RequestMapping("/api/usuario")
 @RequiredArgsConstructor
 public class UsuarioController {
+
+    private final UsuarioService usuarioService;
+
+    @PostMapping("/crear")
+    public ResponseEntity<UsuarioModel> crearUsuario(@RequestBody CrearUsuarioDTO crearUsuarioDTO) {
+        UsuarioModel usuarioModel = usuarioService.crearUsuario(crearUsuarioDTO);
+        return ResponseEntity.status(HttpStatus.CREATED).body(usuarioModel);
+    }
+
+    @GetMapping("/pagina/{page}/{size}")
+    public ResponseEntity<Page<UsuarioModel>> listarUsuariosPaginados(@PathVariable int page, @PathVariable int size) {
+        Page<UsuarioModel> usuarios = usuarioService.usuariosPaginados(page, size);
+        return ResponseEntity.ok(usuarios);
+    }
+
+    @GetMapping("/listar")
+    public ResponseEntity<List<UsuarioModel>> listarUsuarios() {
+        List<UsuarioModel> usuarios = usuarioService.listarUsuarios();
+        return ResponseEntity.ok(usuarios);
+    }
+
+    @PutMapping("actualizar/{id}")
+    public ResponseEntity<UsuarioModel> actualizarUsuario(@PathVariable String id,
+                                                          @RequestBody ActualizarUsuarioDTO actualizarUsuarioDTO) {
+        UsuarioModel usuarioModel = usuarioService.actualizarUsuario(id, actualizarUsuarioDTO);
+        return ResponseEntity.ok(usuarioModel);
+    }
 }

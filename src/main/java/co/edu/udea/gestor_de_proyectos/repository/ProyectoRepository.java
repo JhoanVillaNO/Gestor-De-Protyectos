@@ -6,7 +6,7 @@ import org.springframework.stereotype.Repository;
 
 /**
  * @author Tgl. Jhoan Villa.
- * Email: jhoan.villa@dev-codes.io
+ * Email: jhoan.villa
  * @version Id: <b>gestor-de-proyectos</b> 5/11/2024, 10:21 a. m.
  **/
 @Repository
