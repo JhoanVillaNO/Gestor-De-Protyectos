@@ -9,4 +9,9 @@ import lombok.Data;
  **/
 @Data
 public class ProyectoModel {
+
+    private String id;
+    private String nombre;
+    private String userId;
+    private String categoria;
 }

@@ -15,4 +15,6 @@ public class Proyecto {
     @Id
     private String id;
     private String nombre;
+    private String userId;
+    private String categoria;
 }

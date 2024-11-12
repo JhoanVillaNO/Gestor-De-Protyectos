@@ -9,4 +9,9 @@ import lombok.Data;
  **/
 @Data
 public class UsuarioModel {
+
+    private String id;
+    private String nombre;
+    private int edad;
+    private int estrato;
 }
