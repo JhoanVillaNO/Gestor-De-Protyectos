@@ -2,6 +2,7 @@ package co.edu.udea.gestor_de_proyectos.service;
 
 import co.edu.udea.gestor_de_proyectos.model.dto.ActualizarProyectoDTO;
 import co.edu.udea.gestor_de_proyectos.model.dto.CrearProyectoDTO;
+import co.edu.udea.gestor_de_proyectos.model.proyecto.CambioDeEstadoModel;
 import co.edu.udea.gestor_de_proyectos.model.proyecto.ProyectoModel;
 import org.springframework.data.domain.Page;
 
@@ -21,4 +22,6 @@ public interface ProyectoService {
     ProyectoModel actualizarProyecto (String id, ActualizarProyectoDTO actualizarProyectoDTO);
 
     List<ProyectoModel> listarProyectos ();
+
+    ProyectoModel cambiarEstado(String id, CambioDeEstadoModel cambioDeEstadoModel);
 }

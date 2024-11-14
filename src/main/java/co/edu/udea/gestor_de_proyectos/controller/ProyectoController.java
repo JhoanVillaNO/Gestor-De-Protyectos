@@ -2,6 +2,7 @@ package co.edu.udea.gestor_de_proyectos.controller;
 
 import co.edu.udea.gestor_de_proyectos.model.dto.ActualizarProyectoDTO;
 import co.edu.udea.gestor_de_proyectos.model.dto.CrearProyectoDTO;
+import co.edu.udea.gestor_de_proyectos.model.proyecto.CambioDeEstadoModel;
 import co.edu.udea.gestor_de_proyectos.model.proyecto.ProyectoModel;
 import co.edu.udea.gestor_de_proyectos.service.ProyectoService;
 import lombok.RequiredArgsConstructor;
@@ -46,6 +47,13 @@ public class ProyectoController {
     public ResponseEntity<ProyectoModel> actualizarProyecto(@PathVariable String id,
                                                             @RequestBody ActualizarProyectoDTO actualizarProyectoDTO) {
         ProyectoModel proyectoModel = proyectoService.actualizarProyecto(id, actualizarProyectoDTO);
+        return ResponseEntity.ok(proyectoModel);
+    }
+
+    @PutMapping("/cambiar-estado/{id}")
+    public ResponseEntity<ProyectoModel> cambiarEstado(@PathVariable String id,
+                                                       @RequestBody CambioDeEstadoModel cambioDeEstadoModel){
+        ProyectoModel proyectoModel = proyectoService.cambiarEstado(id, cambioDeEstadoModel);
         return ResponseEntity.ok(proyectoModel);
     }
 }

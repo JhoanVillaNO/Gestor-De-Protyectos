@@ -1,5 +1,6 @@
 package co.edu.udea.gestor_de_proyectos.model.proyecto;
 
+import co.edu.udea.gestor_de_proyectos.model.comentarios.ComentariosModel;
 import lombok.Data;
 import lombok.Getter;
 import lombok.Setter;
@@ -23,4 +24,5 @@ public class ProyectoModel {
     private LocalDateTime fechaCreacion;
     private LocalDateTime fechaModificacion;
     private String estado;
+    private ComentariosModel comentarios;
 }

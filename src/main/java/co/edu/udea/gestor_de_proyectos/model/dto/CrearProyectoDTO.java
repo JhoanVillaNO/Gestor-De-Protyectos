@@ -17,5 +17,4 @@ public class CrearProyectoDTO {
     private String categoria;
     private LocalDateTime fechaCreacion;
     private LocalDateTime fechaModificacion;
-    private String estado;
 }

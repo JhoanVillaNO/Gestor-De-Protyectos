@@ -15,7 +15,6 @@ import org.springframework.stereotype.Service;
 
 import java.util.List;
 import java.util.UUID;
-import java.util.stream.Collectors;
 
 /**
  * @author Tgl. Jhoan Villa.
@@ -75,7 +74,7 @@ public class UsuarioServiceImpl implements UsuarioService {
     @Override
     public List<UsuarioModel> listarUsuarios() {
         List<Usuario> usuarios = usuarioRepository.findAll();
-        return usuarios.stream().map(this::mapToModel).toList()
+        return usuarios.stream().map(this::mapToModel).toList();
     }
 
     private UsuarioModel mapToModel(Usuario usuario) {

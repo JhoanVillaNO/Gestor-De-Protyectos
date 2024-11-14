@@ -1,8 +1,10 @@
 package co.edu.udea.gestor_de_proyectos.service.implement;
 
 import co.edu.udea.gestor_de_proyectos.entity.Proyecto;
+import co.edu.udea.gestor_de_proyectos.model.comentarios.ComentariosModel;
 import co.edu.udea.gestor_de_proyectos.model.dto.ActualizarProyectoDTO;
 import co.edu.udea.gestor_de_proyectos.model.dto.CrearProyectoDTO;
+import co.edu.udea.gestor_de_proyectos.model.proyecto.CambioDeEstadoModel;
 import co.edu.udea.gestor_de_proyectos.model.proyecto.ProyectoModel;
 import co.edu.udea.gestor_de_proyectos.repository.ProyectoRepository;
 import co.edu.udea.gestor_de_proyectos.service.FechaActualService;
@@ -38,7 +40,7 @@ public class ProyectoServiceImpl implements ProyectoService {
         proyecto.setCategoria(crearProyectoDTO.getCategoria());
         proyecto.setFechaCreacion(fechaActual.getCurrentDate());
         proyecto.setFechaModificacion(fechaActual.getCurrentDate());
-        proyecto.setEstado(crearProyectoDTO.getEstado());
+        proyecto.setEstado("Por Revisar");
 
         Proyecto savedProyecto = proyectoRepository.save(proyecto);
         return mapToModel(savedProyecto);
@@ -70,6 +72,24 @@ public class ProyectoServiceImpl implements ProyectoService {
         return proyectos.stream().map(this::mapToModel).toList();
     }
 
+    @Override
+    public ProyectoModel cambiarEstado(String id, CambioDeEstadoModel cambioDeEstadoModel) {
+        Proyecto proyecto = proyectoRepository.findById(id)
+                .orElseThrow(() -> new IllegalArgumentException("Proyecto no encontrado"));
+
+        proyecto.setEstado(cambioDeEstadoModel.getEstado());
+        ComentariosModel comentario = cambioDeEstadoModel.getComentarios();
+
+
+        comentario.setFechaComentarios(fechaActual.getCurrentDate());
+        proyecto.setComentarios(comentario);
+
+        proyecto.setFechaModificacion(fechaActual.getCurrentDate());
+        Proyecto updatedProyecto = proyectoRepository.save(proyecto);
+
+        return mapToModel(updatedProyecto);
+    }
+
     private ProyectoModel mapToModel(Proyecto proyecto) {
         ProyectoModel model = new ProyectoModel();
         model.setId(proyecto.getId());
@@ -79,6 +99,7 @@ public class ProyectoServiceImpl implements ProyectoService {
         model.setFechaCreacion(proyecto.getFechaCreacion());
         model.setFechaModificacion(proyecto.getFechaModificacion());
         model.setEstado(proyecto.getEstado());
+        model.setComentarios(proyecto.getComentarios());
         return model;
     }
 

@@ -1,5 +1,6 @@
 package co.edu.udea.gestor_de_proyectos.entity;
 
+import co.edu.udea.gestor_de_proyectos.model.comentarios.ComentariosModel;
 import lombok.Data;
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
@@ -22,4 +23,5 @@ public class Proyecto {
     private LocalDateTime fechaCreacion;
     private LocalDateTime fechaModificacion;
     private String estado;
+    private ComentariosModel comentarios;
 }
