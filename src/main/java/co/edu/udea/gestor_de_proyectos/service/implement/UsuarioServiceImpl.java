@@ -14,6 +14,8 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.stereotype.Service;
+import org.springframework.http.HttpStatus;
+import org.springframework.web.server.ResponseStatusException;
 
 
 import java.util.List;
@@ -36,7 +38,8 @@ public class UsuarioServiceImpl implements UsuarioService {
     public UsuarioModel autenticarUsuario(LoginUsuarioDTO loginUsuarioDTO) {
     	Usuario usuario = usuarioRepository
                 .findByUserAndPassword(loginUsuarioDTO.getUser(), loginUsuarioDTO.getPassword())
-                .orElseThrow(() -> new RuntimeException("Usuario o contraseña incorrectos"));
+                .orElseThrow(() -> new ResponseStatusException(HttpStatus.UNAUTHORIZED, "Usuario o contraseña incorrectos"));
+                //.orElseThrow(() -> new RuntimeException("Usuario o contraseña incorrectos"));
     	return mapToModel(usuario);
     }
     
