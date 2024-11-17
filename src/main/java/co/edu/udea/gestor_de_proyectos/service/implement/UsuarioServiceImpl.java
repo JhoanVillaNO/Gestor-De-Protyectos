@@ -112,7 +112,8 @@ public class UsuarioServiceImpl implements UsuarioService {
     public void changePassword(String username, String newPassword, String confirmPassword) {
         // Validar que las contraseñas coincidan
         if (!newPassword.equals(confirmPassword)) {
-            throw new IllegalArgumentException("Las contraseñas no coinciden.");
+        	throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "Las contraseñas no coinciden.");
+            //throw new IllegalArgumentException("Las contraseñas no coinciden.");
         }
 
         // Buscar al usuario por username
@@ -120,7 +121,6 @@ public class UsuarioServiceImpl implements UsuarioService {
         		.orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND, "Usuario no encontrado"));
                 //.orElseThrow(() -> new RuntimeException("Usuario no encontrado"));
         		
-
         // Actualizar la contraseña
         usuario.setPassword(newPassword);
         usuarioRepository.save(usuario);
