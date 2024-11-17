@@ -1,5 +1,6 @@
 package co.edu.udea.gestor_de_proyectos.controller;
 
+import co.edu.udea.gestor_de_proyectos.model.dto.LoginUsuarioDTO;
 import co.edu.udea.gestor_de_proyectos.model.dto.ActualizarUsuarioDTO;
 import co.edu.udea.gestor_de_proyectos.model.dto.CrearUsuarioDTO;
 import co.edu.udea.gestor_de_proyectos.model.usuario.UsuarioModel;
@@ -47,5 +48,11 @@ public class UsuarioController {
                                                           @RequestBody ActualizarUsuarioDTO actualizarUsuarioDTO) {
         UsuarioModel usuarioModel = usuarioService.actualizarUsuario(id, actualizarUsuarioDTO);
         return ResponseEntity.ok(usuarioModel);
+    }
+    
+    @PostMapping("/login")
+    public ResponseEntity<UsuarioModel> login(@RequestBody LoginUsuarioDTO loginUsuarioDTO) {
+        UsuarioModel usuario = usuarioService.autenticarUsuario(loginUsuarioDTO);
+        return ResponseEntity.ok(usuario);
     }
 }

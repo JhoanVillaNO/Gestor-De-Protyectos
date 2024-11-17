@@ -6,7 +6,7 @@ spring:
   servlet:
   data:
     mongodb:
-      uri: mongodb://localhost:27017/gestor-proyectos
+      uri: mongodb://localhost:27017/GestorProyectos
   jpa:
     hibernate:
       ddl-auto: update

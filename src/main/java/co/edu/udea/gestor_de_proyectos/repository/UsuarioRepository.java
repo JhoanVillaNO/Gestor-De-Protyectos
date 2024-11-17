@@ -4,6 +4,8 @@ import co.edu.udea.gestor_de_proyectos.entity.Usuario;
 import org.springframework.data.mongodb.repository.MongoRepository;
 import org.springframework.stereotype.Repository;
 
+import java.util.Optional;
+
 /**
  * @author Tgl. Jhoan Villa.
  * Email: jhoan.villa
@@ -11,4 +13,6 @@ import org.springframework.stereotype.Repository;
  **/
 @Repository
 public interface UsuarioRepository extends MongoRepository<Usuario, String> {
+	
+	Optional<Usuario> findByUserAndPassword(String user, String password);
 }

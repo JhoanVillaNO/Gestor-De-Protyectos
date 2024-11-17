@@ -3,6 +3,7 @@ package co.edu.udea.gestor_de_proyectos.service;
 import co.edu.udea.gestor_de_proyectos.model.dto.ActualizarUsuarioDTO;
 import co.edu.udea.gestor_de_proyectos.model.dto.CrearUsuarioDTO;
 import co.edu.udea.gestor_de_proyectos.model.usuario.UsuarioModel;
+import co.edu.udea.gestor_de_proyectos.model.dto.LoginUsuarioDTO;
 import org.springframework.data.domain.Page;
 
 import java.util.List;
@@ -21,4 +22,6 @@ public interface UsuarioService {
     UsuarioModel actualizarUsuario (String id, ActualizarUsuarioDTO actualizarUsuarioDTO);
 
     List<UsuarioModel> listarUsuarios ();
+    
+    UsuarioModel autenticarUsuario(LoginUsuarioDTO loginUsuarioDTO);
 }

@@ -1,5 +1,6 @@
 package co.edu.udea.gestor_de_proyectos.service.implement;
 
+
 import co.edu.udea.gestor_de_proyectos.entity.Usuario;
 import co.edu.udea.gestor_de_proyectos.model.dto.ActualizarUsuarioDTO;
 import co.edu.udea.gestor_de_proyectos.model.dto.CrearUsuarioDTO;
@@ -7,11 +8,13 @@ import co.edu.udea.gestor_de_proyectos.model.usuario.UsuarioModel;
 import co.edu.udea.gestor_de_proyectos.repository.UsuarioRepository;
 import co.edu.udea.gestor_de_proyectos.service.FechaActualService;
 import co.edu.udea.gestor_de_proyectos.service.UsuarioService;
+import co.edu.udea.gestor_de_proyectos.model.dto.LoginUsuarioDTO;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.stereotype.Service;
+
 
 import java.util.List;
 import java.util.UUID;
@@ -29,6 +32,14 @@ public class UsuarioServiceImpl implements UsuarioService {
     private final UsuarioRepository usuarioRepository;
     private final FechaActualService fechaActual;
 
+    @Override
+    public UsuarioModel autenticarUsuario(LoginUsuarioDTO loginUsuarioDTO) {
+    	Usuario usuario = usuarioRepository
+                .findByUserAndPassword(loginUsuarioDTO.getUser(), loginUsuarioDTO.getPassword())
+                .orElseThrow(() -> new RuntimeException("Usuario o contraseña incorrectos"));
+    	return mapToModel(usuario);
+    }
+    
     @Override
     public UsuarioModel crearUsuario(CrearUsuarioDTO crearUsuarioDTO) {
         Usuario usuario = new Usuario();
