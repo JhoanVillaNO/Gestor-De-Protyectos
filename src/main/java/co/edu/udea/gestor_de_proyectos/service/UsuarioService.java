@@ -24,4 +24,7 @@ public interface UsuarioService {
     List<UsuarioModel> listarUsuarios ();
     
     UsuarioModel autenticarUsuario(LoginUsuarioDTO loginUsuarioDTO);
+    
+    void changePassword(String username, String newPassword, String confirmPassword);
+
 }

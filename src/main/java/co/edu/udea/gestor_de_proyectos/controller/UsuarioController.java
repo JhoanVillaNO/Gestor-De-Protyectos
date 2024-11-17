@@ -1,5 +1,6 @@
 package co.edu.udea.gestor_de_proyectos.controller;
 
+import co.edu.udea.gestor_de_proyectos.model.dto.CambiarContrasenaDTO;
 import co.edu.udea.gestor_de_proyectos.model.dto.LoginUsuarioDTO;
 import co.edu.udea.gestor_de_proyectos.model.dto.ActualizarUsuarioDTO;
 import co.edu.udea.gestor_de_proyectos.model.dto.CrearUsuarioDTO;
@@ -55,5 +56,15 @@ public class UsuarioController {
     public ResponseEntity<UsuarioModel> login(@RequestBody LoginUsuarioDTO loginUsuarioDTO) {
         UsuarioModel usuario = usuarioService.autenticarUsuario(loginUsuarioDTO);
         return ResponseEntity.ok(usuario);
+    }
+    
+    @PostMapping("/change-password")
+    public ResponseEntity<String> changePassword(@RequestBody CambiarContrasenaDTO changePasswordDTO) {
+        usuarioService.changePassword(
+            changePasswordDTO.getUsername(),
+            changePasswordDTO.getNewPassword(),
+            changePasswordDTO.getConfirmPassword()
+        );
+        return ResponseEntity.ok("Contraseña actualizada exitosamente.");
     }
 }

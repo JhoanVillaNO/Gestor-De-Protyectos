@@ -35,15 +35,6 @@ public class UsuarioServiceImpl implements UsuarioService {
     private final FechaActualService fechaActual;
 
     @Override
-    public UsuarioModel autenticarUsuario(LoginUsuarioDTO loginUsuarioDTO) {
-    	Usuario usuario = usuarioRepository
-                .findByUserAndPassword(loginUsuarioDTO.getUser(), loginUsuarioDTO.getPassword())
-                .orElseThrow(() -> new ResponseStatusException(HttpStatus.UNAUTHORIZED, "Usuario o contraseña incorrectos"));
-                //.orElseThrow(() -> new RuntimeException("Usuario o contraseña incorrectos"));
-    	return mapToModel(usuario);
-    }
-    
-    @Override
     public UsuarioModel crearUsuario(CrearUsuarioDTO crearUsuarioDTO) {
         Usuario usuario = new Usuario();
         usuario.setId(generateId(null));
@@ -107,5 +98,33 @@ public class UsuarioServiceImpl implements UsuarioService {
     private String generateId(String id) {
         return (id == null) ? UUID.randomUUID().toString() : id;
     }
+    
+    @Override
+    public UsuarioModel autenticarUsuario(LoginUsuarioDTO loginUsuarioDTO) {
+    	Usuario usuario = usuarioRepository
+                .findByUserAndPassword(loginUsuarioDTO.getUser(), loginUsuarioDTO.getPassword())
+                .orElseThrow(() -> new ResponseStatusException(HttpStatus.UNAUTHORIZED, "Usuario o contraseña incorrectos"));
+                //.orElseThrow(() -> new RuntimeException("Usuario o contraseña incorrectos"));
+    	return mapToModel(usuario);
+    }
+    
+    @Override
+    public void changePassword(String username, String newPassword, String confirmPassword) {
+        // Validar que las contraseñas coincidan
+        if (!newPassword.equals(confirmPassword)) {
+            throw new IllegalArgumentException("Las contraseñas no coinciden.");
+        }
+
+        // Buscar al usuario por username
+        Usuario usuario = usuarioRepository.findByUser(username)
+        		.orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND, "Usuario no encontrado"));
+                //.orElseThrow(() -> new RuntimeException("Usuario no encontrado"));
+        		
+
+        // Actualizar la contraseña
+        usuario.setPassword(newPassword);
+        usuarioRepository.save(usuario);
+    }
+
 }
 
