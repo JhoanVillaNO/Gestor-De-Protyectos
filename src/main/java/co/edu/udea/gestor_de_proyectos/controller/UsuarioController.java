@@ -20,6 +20,7 @@ import java.util.List;
  **/
 @RestController
 @RequestMapping("/api/usuario")
+@CrossOrigin(origins = "*") // Permitir solicitudes de cualquier origen
 @RequiredArgsConstructor
 public class UsuarioController {
 
