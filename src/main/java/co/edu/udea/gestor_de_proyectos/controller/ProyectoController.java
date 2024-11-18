@@ -10,6 +10,7 @@ import org.springframework.data.domain.Page;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.bind.annotation.CrossOrigin;
 
 import java.util.List;
 
@@ -20,6 +21,7 @@ import java.util.List;
  **/
 @RestController
 @RequestMapping("/api/proyectos")
+@CrossOrigin(origins = "*") // Permitir solicitudes de cualquier origen
 @RequiredArgsConstructor
 public class ProyectoController {
 
