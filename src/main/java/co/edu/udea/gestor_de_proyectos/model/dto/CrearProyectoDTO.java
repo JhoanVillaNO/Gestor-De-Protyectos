@@ -13,6 +13,7 @@ import java.time.LocalDateTime;
 public class CrearProyectoDTO {
 
     private String nombre;
+    private String descripcion;
     private String userId;
     private String categoria;
     private LocalDateTime fechaCreacion;

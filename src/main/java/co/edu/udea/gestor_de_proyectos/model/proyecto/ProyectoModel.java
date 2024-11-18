@@ -19,6 +19,7 @@ public class ProyectoModel {
 
     private String id;
     private String nombre;
+    private String descripcion;
     private String userId;
     private String categoria;
     private LocalDateTime fechaCreacion;

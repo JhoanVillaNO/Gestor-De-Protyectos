@@ -36,6 +36,7 @@ public class ProyectoServiceImpl implements ProyectoService {
         Proyecto proyecto = new Proyecto();
         proyecto.setId(generateId(null));
         proyecto.setNombre(crearProyectoDTO.getNombre());
+        proyecto.setDescripcion(crearProyectoDTO.getDescripcion());
         proyecto.setUserId(crearProyectoDTO.getUserId());
         proyecto.setCategoria(crearProyectoDTO.getCategoria());
         proyecto.setFechaCreacion(fechaActual.getCurrentDate());
@@ -94,6 +95,7 @@ public class ProyectoServiceImpl implements ProyectoService {
         ProyectoModel model = new ProyectoModel();
         model.setId(proyecto.getId());
         model.setNombre(proyecto.getNombre());
+        model.setDescripcion(proyecto.getDescripcion());
         model.setUserId(proyecto.getUserId());
         model.setCategoria(proyecto.getCategoria());
         model.setFechaCreacion(proyecto.getFechaCreacion());
