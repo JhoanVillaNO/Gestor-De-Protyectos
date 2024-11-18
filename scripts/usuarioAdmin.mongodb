@@ -8,6 +8,6 @@ db.usuario.insertOne({
     fechaModificacion: ISODate(),
     ciudad: "Medellin",
     user: "admin",
-    password: "admin123"
+    password: "admin123",
     rol: "admin"
 });
