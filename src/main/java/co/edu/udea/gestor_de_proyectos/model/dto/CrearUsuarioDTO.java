@@ -21,5 +21,4 @@ public class CrearUsuarioDTO {
     private String ciudad;
     private String user;
     private String password;
-    private String rol;
 }

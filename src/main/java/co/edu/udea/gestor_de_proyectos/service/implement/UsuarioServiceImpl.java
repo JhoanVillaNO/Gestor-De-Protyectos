@@ -47,8 +47,7 @@ public class UsuarioServiceImpl implements UsuarioService {
         usuario.setCiudad(crearUsuarioDTO.getCiudad());
         usuario.setUser(crearUsuarioDTO.getUser());
         usuario.setPassword(crearUsuarioDTO.getPassword());
-        usuario.setRol(crearUsuarioDTO.getRol());
-
+        usuario.setRol("Basico");
         Usuario savedUsuario = usuarioRepository.save(usuario);
         return mapToModel(savedUsuario);
     }
@@ -70,8 +69,6 @@ public class UsuarioServiceImpl implements UsuarioService {
         usuario.setEstrato(actualizarUsuarioDTO.getEstrato());
         usuario.setCiudad(actualizarUsuarioDTO.getCiudad());
         usuario.setFechaModificacion(fechaActual.getCurrentDate());
-        usuario.setRol(actualizarUsuarioDTO.getRol());
-
         Usuario updatedUsuario = usuarioRepository.save(usuario);
         return mapToModel(updatedUsuario);
     }
