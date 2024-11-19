@@ -13,7 +13,9 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.bind.annotation.CrossOrigin;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 /**
  * @author Tgl. Jhoan Villa.
@@ -60,12 +62,19 @@ public class UsuarioController {
     }
     
     @PostMapping("/change-password")
-    public ResponseEntity<String> changePassword(@RequestBody CambiarContrasenaDTO changePasswordDTO) {
+    public ResponseEntity<Map<String, Object>> changePassword(@RequestBody CambiarContrasenaDTO changePasswordDTO) {
         usuarioService.changePassword(
             changePasswordDTO.getUsername(),
             changePasswordDTO.getNewPassword(),
             changePasswordDTO.getConfirmPassword()
         );
-        return ResponseEntity.ok("Contraseña actualizada exitosamente.");
+        
+        // Crear el mapa de respuesta
+        Map<String, Object> response = new HashMap<>();
+        response.put("message", "Contraseña actualizada exitosamente.");
+        response.put("success", true);
+
+        // Devolver el mapa como respuesta
+        return ResponseEntity.ok(response);
     }
 }
