@@ -24,4 +24,5 @@ public class UsuarioModel {
     private LocalDateTime fechaCreacion;
     private LocalDateTime fechaModificacion;
     private String ciudad;
+    private String rol;
 }

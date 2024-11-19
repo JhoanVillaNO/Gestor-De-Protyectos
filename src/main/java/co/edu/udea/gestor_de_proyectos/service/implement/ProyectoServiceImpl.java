@@ -16,6 +16,7 @@ import org.springframework.data.domain.PageRequest;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.Optional;
 import java.util.UUID;
 
 /**
@@ -45,6 +46,20 @@ public class ProyectoServiceImpl implements ProyectoService {
 
         Proyecto savedProyecto = proyectoRepository.save(proyecto);
         return mapToModel(savedProyecto);
+    }
+
+    @Override
+    public List<ProyectoModel> listarProyectosPorUsuario(String userId) {
+        List<Proyecto> proyectos = proyectoRepository.findAllByUserId(userId);
+        return proyectos.stream().map(this::mapToModel).toList();
+    }
+
+    @Override
+    public ProyectoModel proyectoPorId(String proyectoId) {
+        Optional<Proyecto> proyectoOptional = proyectoRepository.findById(proyectoId);
+        Proyecto proyecto = proyectoOptional.orElseThrow(() ->
+                new RuntimeException("El proyecto con ID " + proyectoId + " no existe"));
+        return mapToModel(proyecto);
     }
 
     @Override
@@ -83,7 +98,6 @@ public class ProyectoServiceImpl implements ProyectoService {
 
 
         comentario.setFechaComentarios(fechaActual.getCurrentDate());
-        proyecto.setComentarios(comentario);
 
         proyecto.setFechaModificacion(fechaActual.getCurrentDate());
         Proyecto updatedProyecto = proyectoRepository.save(proyecto);

@@ -4,6 +4,8 @@ import co.edu.udea.gestor_de_proyectos.entity.Proyecto;
 import org.springframework.data.mongodb.repository.MongoRepository;
 import org.springframework.stereotype.Repository;
 
+import java.util.List;
+
 /**
  * @author Tgl. Jhoan Villa.
  * Email: jhoan.villa
@@ -11,4 +13,6 @@ import org.springframework.stereotype.Repository;
  **/
 @Repository
 public interface ProyectoRepository extends MongoRepository<Proyecto, String> {
+
+    List<Proyecto> findAllByUserId (String userId);
 }

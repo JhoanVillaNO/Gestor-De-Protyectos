@@ -33,9 +33,21 @@ public class ProyectoController {
         return ResponseEntity.status(HttpStatus.CREATED).body(proyectoModel);
     }
 
+    @PostMapping("/{id}")
+    public ResponseEntity<ProyectoModel> obtenerProyectoPorId(@PathVariable String id) {
+        ProyectoModel proyectoModel = proyectoService.proyectoPorId(id);
+        return ResponseEntity.ok(proyectoModel);
+    }
+
     @GetMapping("/listar")
     public ResponseEntity<List<ProyectoModel>> listarProyectos() {
         List<ProyectoModel> proyectos = proyectoService.listarProyectos();
+        return ResponseEntity.ok(proyectos);
+    }
+
+    @GetMapping("/listar/{userId}")
+    public ResponseEntity<List<ProyectoModel>> listarProyectosPorUsuario(@PathVariable String userId) {
+        List<ProyectoModel> proyectos = proyectoService.listarProyectosPorUsuario(userId);
         return ResponseEntity.ok(proyectos);
     }
 

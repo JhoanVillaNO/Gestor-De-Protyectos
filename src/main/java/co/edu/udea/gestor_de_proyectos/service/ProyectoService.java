@@ -24,4 +24,8 @@ public interface ProyectoService {
     List<ProyectoModel> listarProyectos ();
 
     ProyectoModel cambiarEstado(String id, CambioDeEstadoModel cambioDeEstadoModel);
+
+    ProyectoModel proyectoPorId(String proyectoId);
+
+    List<ProyectoModel> listarProyectosPorUsuario(String userId);
 }

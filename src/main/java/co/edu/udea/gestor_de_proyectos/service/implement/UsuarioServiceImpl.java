@@ -89,6 +89,7 @@ public class UsuarioServiceImpl implements UsuarioService {
         model.setFechaCreacion(usuario.getFechaCreacion());
         model.setFechaModificacion(usuario.getFechaModificacion());
         model.setCiudad(usuario.getCiudad());
+        model.setRol(usuario.getRol());
         return model;
     }
 
