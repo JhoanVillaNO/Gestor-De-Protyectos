@@ -33,7 +33,7 @@ public class ProyectoController {
         return ResponseEntity.status(HttpStatus.CREATED).body(proyectoModel);
     }
 
-    @PostMapping("/{id}")
+    @GetMapping("/{id}")
     public ResponseEntity<ProyectoModel> obtenerProyectoPorId(@PathVariable String id) {
         ProyectoModel proyectoModel = proyectoService.proyectoPorId(id);
         return ResponseEntity.ok(proyectoModel);
