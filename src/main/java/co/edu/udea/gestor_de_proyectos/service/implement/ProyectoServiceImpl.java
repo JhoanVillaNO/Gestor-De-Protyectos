@@ -41,7 +41,7 @@ public class ProyectoServiceImpl implements ProyectoService {
         proyecto.setCategoria(crearProyectoDTO.getCategoria());
         proyecto.setFechaCreacion(fechaActual.getCurrentDate());
         proyecto.setFechaModificacion(fechaActual.getCurrentDate());
-        proyecto.setEstado("Por Revisar");
+        proyecto.setEstado("Por revisar");
 
         Proyecto savedProyecto = proyectoRepository.save(proyecto);
         return mapToModel(savedProyecto);
