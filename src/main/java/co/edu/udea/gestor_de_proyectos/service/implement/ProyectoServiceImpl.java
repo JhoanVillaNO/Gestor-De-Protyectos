@@ -102,10 +102,10 @@ public class ProyectoServiceImpl implements ProyectoService {
         comentario.setFechaComentarios(fechaActual.getCurrentDate());
         comentario.setComentario(comentariosDTO.getComentario());
 
-        if ("Aceptado".equalsIgnoreCase(cambioDeEstadoModel.getEstado())) {
-            comentario.setTipoComentario("Proyecto Aceptado");
+        if ("Aprobado".equalsIgnoreCase(cambioDeEstadoModel.getEstado())) {
+            comentario.setTipoComentario("Proyecto aceptado");
         } else {
-            comentario.setTipoComentario("Proyecto Rechazado");
+            comentario.setTipoComentario("Proyecto rechazado");
         }
         proyecto.setComentarios(comentario);
         proyecto.setFechaModificacion(fechaActual.getCurrentDate());
