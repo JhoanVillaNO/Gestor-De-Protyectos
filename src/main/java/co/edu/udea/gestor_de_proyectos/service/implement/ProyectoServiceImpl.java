@@ -3,6 +3,7 @@ package co.edu.udea.gestor_de_proyectos.service.implement;
 import co.edu.udea.gestor_de_proyectos.entity.Proyecto;
 import co.edu.udea.gestor_de_proyectos.model.comentarios.ComentariosModel;
 import co.edu.udea.gestor_de_proyectos.model.dto.ActualizarProyectoDTO;
+import co.edu.udea.gestor_de_proyectos.model.dto.ComentariosDTO;
 import co.edu.udea.gestor_de_proyectos.model.dto.CrearProyectoDTO;
 import co.edu.udea.gestor_de_proyectos.model.proyecto.CambioDeEstadoModel;
 import co.edu.udea.gestor_de_proyectos.model.proyecto.ProyectoModel;
@@ -94,14 +95,21 @@ public class ProyectoServiceImpl implements ProyectoService {
                 .orElseThrow(() -> new IllegalArgumentException("Proyecto no encontrado"));
 
         proyecto.setEstado(cambioDeEstadoModel.getEstado());
-        ComentariosModel comentario = cambioDeEstadoModel.getComentarios();
 
-
+        ComentariosDTO comentariosDTO = cambioDeEstadoModel.getComentarios();
+        ComentariosModel comentario = new ComentariosModel();
+        comentario.setUser(comentariosDTO.getUser());
         comentario.setFechaComentarios(fechaActual.getCurrentDate());
+        comentario.setComentario(comentariosDTO.getComentario());
 
+        if ("Aceptado".equalsIgnoreCase(cambioDeEstadoModel.getEstado())) {
+            comentario.setTipoComentario("Proyecto Aceptado");
+        } else {
+            comentario.setTipoComentario("Proyecto Rechazado");
+        }
+        proyecto.setComentarios(comentario);
         proyecto.setFechaModificacion(fechaActual.getCurrentDate());
         Proyecto updatedProyecto = proyectoRepository.save(proyecto);
-
         return mapToModel(updatedProyecto);
     }
 
